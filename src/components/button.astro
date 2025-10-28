@@ -1,7 +1,7 @@
 ---
-interface Props {
+interface Props extends astroHTML.JSX.ButtonHTMLAttributes {
   variant?: ButtonVariant;
-  link: boolean;
+  link?: boolean;
 }
 
 type ButtonVariant = keyof typeof buttonVariants;
@@ -15,11 +15,16 @@ const buttonVariants = {
     "border border-primary text-primary hover:opacity-80 transition-opacity",
 };
 
-const { variant = "primary", link = false } = Astro.props;
+const {
+  variant = "primary",
+  link = false,
+  class: className,
+  ...rest
+} = Astro.props;
 
-const buttonClass = `${baseButton} ${buttonVariants[variant]} ${link ? "cursor-pointer" : ""}`;
+const buttonClass = `${baseButton} ${buttonVariants[variant]} ${link ? "cursor-pointer" : ""} ${className || ""}`;
 ---
 
-<button class={buttonClass}>
+<button class={buttonClass} {...rest}>
     <slot />
 </button>
