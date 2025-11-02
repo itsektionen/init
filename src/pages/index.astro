@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
-import Layout from "../layouts/layout.astro";
 import Button from "../components/button.astro";
+import Layout from "../layouts/layout.astro";
 ---
 
 <Layout>
@@ -15,10 +15,10 @@ import Button from "../components/button.astro";
             for the IT Chapter.
         </p>
         <div class="flex gap-4">
-            <a href="/join">
+            <a transition:name="join" href="/join">
                 <Button link> Join </Button>
             </a>
-            <a href="/contact">
+            <a transition:name="contact" href="/contact">
                 <Button variant="secondary" link> Contact </Button>
             </a>
         </div>

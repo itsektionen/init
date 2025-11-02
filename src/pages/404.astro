@@ -1,0 +1,21 @@
+---
+import FourOhFour from "../assets/404.svg";
+import Button from "../components/button.astro";
+import Layout from "../layouts/layout.astro";
+---
+
+<Layout>
+    <FourOhFour class="mb-8" width="180" height="65" />
+    <section class="space-y-4 mb-8">
+        <p>This page does not exist.</p>
+        <p>Do you believe it should?</p>
+    </section>
+    <div class="flex gap-4">
+        <a transition:name="join" href="/join">
+            <Button link> Join </Button>
+        </a>
+        <a transition:name="contact" href="/contact">
+            <Button variant="secondary" link> Contact </Button>
+        </a>
+    </div>
+</Layout>
