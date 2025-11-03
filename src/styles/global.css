@@ -1,15 +1,56 @@
 @import "tailwindcss";
 
 body {
-    @apply bg-black text-primary;
-    font-family: "Geist Mono";
+  @apply bg-black text-primary;
+  font-family: "Geist Mono", monospace;
 }
 
 @theme {
-    --color-primary: oklch(1 0 0);
-    --color-muted: oklch(0.4525 0 0);
+  --color-primary: oklch(1 0 0);
+  --color-muted: oklch(0.4525 0 0);
 }
 
 * {
-    box-sizing: border-box !important;
+  box-sizing: border-box;
 }
+
+/* Ugly ahh workaround to prevent named elements from discretely transition instead of crossfading */
+::view-transition-old(*) {
+  animation: astroFadeOut 0.21s ease both;
+}
+
+::view-transition-new(*) {
+  animation: astroFadeIn 0.21s ease both;
+}
+
+@keyframes astroFadeInOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes astroFadeIn {
+  from {
+    opacity: 0;
+    mix-blend-mode: plus-lighter;
+  }
+  to {
+    opacity: 1;
+    mix-blend-mode: plus-lighter;
+  }
+}
+
+@keyframes astroFadeOut {
+  from {
+    opacity: 1;
+    mix-blend-mode: plus-lighter;
+  }
+  to {
+    opacity: 0;
+    mix-blend-mode: plus-lighter;
+  }
+}
+/* End of workaround */
