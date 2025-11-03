@@ -4,33 +4,33 @@ export const prerender = false; // Not needed in 'server' mode
 class ValidationError extends Error {}
 
 if (Astro.request.method === "POST") {
-    try {
-        const data = await Astro.request.formData();
-        const name = data.get("name");
-        const email = data.get("email");
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("name");
+    const email = data.get("email");
 
-        const schema = z.object({
-            name: z.string().min(2).max(100),
-            email: z.string().email(),
-        });
+    const schema = z.object({
+      name: z.string().min(2).max(100),
+      email: z.string().email(),
+    });
 
-        const result = schema.safeParse({ name, email });
+    const result = schema.safeParse({ name, email });
 
-        if (!result.success) {
-            console.error(result.error);
-            throw new ValidationError("Invalid input");
-        }
-
-        return Astro.redirect("/join/success");
-    } catch (error) {
-        if (error instanceof Error) {
-            console.error(error.message);
-        }
-
-        if (error instanceof ValidationError) {
-            return Astro.redirect("/join?error=Missing+or+invalid+fields");
-        }
+    if (!result.success) {
+      console.error(result.error);
+      throw new ValidationError("Invalid input");
     }
+
+    return Astro.redirect("/join/success");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+
+    if (error instanceof ValidationError) {
+      return Astro.redirect("/join?error=Missing+or+invalid+fields");
+    }
+  }
 }
 
 import { z } from "astro:content";
@@ -65,7 +65,7 @@ const error = Astro.url.searchParams.get("error");
             <p class="text-sm">
                 By submitting this form, you agree to the <a
                     href="https://www.kth.it/privacy"
-                    class="hover:underline underline-offset-4"
+                    class="underline underline-offset-4"
                     target="blank"
                 >
                     IT Chapter's GDPR Policy.
