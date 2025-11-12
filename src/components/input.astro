@@ -1,0 +1,7 @@
+---
+interface Props extends astroHTML.JSX.InputHTMLAttributes {}
+const { ...rest } = Astro.props;
+---
+
+<input class="border p-2" {...rest} />
+<slot />

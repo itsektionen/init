@@ -1,0 +1,79 @@
+---
+export const prerender = false; // Not needed in 'server' mode
+
+class ValidationError extends Error {}
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("name");
+    const email = data.get("email");
+
+    const schema = z.object({
+      name: z.string().min(2).max(100),
+      email: z.string().email(),
+    });
+
+    const result = schema.safeParse({ name, email });
+
+    if (!result.success) {
+      console.error(result.error);
+      throw new ValidationError("Invalid input");
+    }
+
+    return Astro.redirect("/join/success");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      return Astro.redirect("/join?error=Internal+server+error");
+    }
+
+    if (error instanceof ValidationError) {
+      return Astro.redirect("/join?error=Missing+or+invalid+fields");
+    }
+  }
+}
+
+import { z } from "astro:content";
+import Button from "../../components/button.astro";
+import Input from "../../components/input.astro";
+import Layout from "../../layouts/layout.astro";
+
+const error = Astro.url.searchParams.get("error");
+---
+
+<Layout>
+    <section class="space-y-4">
+        {
+            error && (
+                <div class="mb-8">
+                    <p class="text-red-700">Error.</p>
+                    <p>{error}</p>
+                </div>
+            )
+        }
+
+        <form transition:persist transition:name="form" method="POST" class="space-y-4">
+            <div class="flex flex-col gap-2">
+                <label class="text-xs" for="email">Email:</label>
+                <Input type="email" id="email" name="email" required />
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs" for="name">Name:</label>
+                <Input type="text" id="name" name="name" required />
+            </div>
+            <p class="text-sm">
+                By submitting this form, you agree to the <a
+                    href="https://www.kth.it/privacy"
+                    class="underline underline-offset-4"
+                    target="blank"
+                >
+                    IT Chapter's GDPR Policy.
+                </a>
+            </p>
+            <Button transition:name="join" class="mt-8" type="submit"
+                >Join</Button
+            >
+        </form>
+    </section>
+</Layout>
