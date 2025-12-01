@@ -1,15 +1,36 @@
 ---
+import { mapAocResponse } from "../../types/aoc";
 import Layout from "../layouts/layout.astro";
+const cookie = "session=53616c7465645f5f6d93d3c6cd08120c56dc4178291a67cb12c79b6ab42979a904df02ba25cc21599b7fea1ffc91ac3a0b74ac24aea784a76fcf40f3816c1921"
+const res = await fetch("https://adventofcode.com/2025/leaderboard/private/view/5258133.json", {
+  headers: {
+    "Cookie": cookie
+  }
+})
+
+const data = await res.json();
+const aoc = mapAocResponse(data)
+
 ---
 
 <Layout>
-    <section class="space-y-4">
+    <section class="space-y-4 mb-8">
         <p>It is finally time for Advent of Code!</p>
         <p>
-            We have a team which you can join via this code:
+            We have a leaderboard which you can join via this code:
         </p>
         <div class="border px-4 py-2 flex w-fit gap-4 items-center justify-between">
             <code>5258133-e44ddb97</code>
         </div>
+    </section>
+    <section>
+        <h2 class="text-lg mb-4">Leaderboard</h2>
+        {
+          aoc.members.map((member, i) => (
+          <div>
+              <p>{`${i + 1}) ${member.name}`}</p>
+          </div>
+          ))
+        }
     </section>
 </Layout>
