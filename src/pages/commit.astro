@@ -1,0 +1,89 @@
+---
+import AboutLogo from "../assets/commit/about.svg";
+import CommitLogo from "../assets/commit/commit.svg";
+import ScheduleLogo from "../assets/commit/schedule.svg";
+import TracksLogo from "../assets/commit/tracks.svg";
+import WebdevLogo from "../assets/commit/webdev.svg";
+import MachineLogo from "../assets/commit/machine.svg";
+import ArduinoPicture from "../assets/commit/arduino.webp";
+import FaqSection from "../components/commit/faq-section.astro";
+import Track from "../components/commit/track.astro";
+import Layout from "../layouts/layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+    <section class="space-y-4">
+        <CommitLogo class="max-w-full h-auto" />
+        <h2 class="text-center text-xl font-bold mb-20">19.9 - 20.9, 2026</h2>
+
+        <AboutLogo class="w-auto max-h-7 flex mx-auto" />
+        <p>
+            <b>commit</b> is a weekend-long hackathon for chapter members hosted by us at
+            <b>init</b>. Over the course of <b>commit</b>, you'll learn coding skills
+            from KTH students, form a team, and work on a cool computer science
+            project. <b>commit</b> is open to all skill levels, first time coders and expert
+            hackers are all welcome.
+        </p>
+        <div>
+            <img
+                src={ArduinoPicture.src}
+                alt="An arduino UNO R4 board"
+                class="w-auto max-h-100 mx-auto"
+            />
+            <h3 class="text-center text-xl font-bold">Win an Arduino UNO!</h3>
+        </div>
+
+        <TracksLogo class="w-auto max-h-7 flex mb-4 mx-auto mt-20" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-center">
+            <Track 
+                id="webdev" 
+                title="Web Development" 
+                description="Building responsive, accessible, and high-performance web applications."
+            >
+                <WebdevLogo class="w-full h-auto" />
+            </Track>
+            <Track
+                id="machine"
+                title="Machine Learning"
+                description="Train intelligent systems, analyze data, and build predictive models."
+            >
+                <MachineLogo class="w-full h-auto" />
+            </Track>
+        </div>
+
+        <!-- /*TODO: make a better schedule section -->
+        <ScheduleLogo class="w-auto max-h-7 flex mx-auto mt-20" />
+        <div class="flex *:flex-col md:flex-row gap-4">
+            <div class="flex-1 border border-white p-5">
+                    <h3 class="font-bold mb-2">Day 1: September 19</h3>
+                    <ul>
+                        <li>09:00-10:00: Check-in</li>
+                        <li>10:00-11:00: Opening</li>
+                        <li>11:00-13:00: Team formation</li>
+                        <li>13:00-14:00: Lunch</li>
+                        <li>14:00-19:00: Dev phase I</li>
+                        <li>19:00-20:00: Dinner</li>
+                        <li>20:00-22:00: Devphase II</li>
+                        <li>22:00-00:00: Dev / Rest</li>
+                    </ul>
+            </div>
+            <div class="flex-1 border border-white p-5">
+                    <h3 class="font-bold mb-2">Day 2: September 20</h3>
+                    <ul>
+                        <li>00:00-08:00: Dev / Rest</li>
+                        <li>08:00-09:00: Breakfast</li>
+                        <li>09:00-12:00: Final dev phase</li>
+                        <li>12:00: Submission deadline</li>
+                        <li>12:00-13:00: Judges review</li>
+                        <li>13:00-14:30: Demonstrations</li>
+                        <li>14:30-15:30: Awards</li>
+                        <li>15:30-16:00: Closing</li>
+                        <li>17:00-late: Afterparty!!!</li>
+                    </ul>
+            </div>
+        </div>
+
+        <FaqSection />
+    </section>
+</Layout>
