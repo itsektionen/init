@@ -1,10 +1,11 @@
 ---
 import AboutLogo from "../assets/commit/about.svg";
+import ArduinoPicture from "../assets/commit/arduino.webp";
 import CommitLogo from "../assets/commit/commit.svg";
+import FreestyleLogo from "../assets/commit/freestyle.svg";
+import MachineLogo from "../assets/commit/machine.svg";
 import TracksLogo from "../assets/commit/tracks.svg";
 import WebdevLogo from "../assets/commit/webdev.svg";
-import MachineLogo from "../assets/commit/machine.svg";
-import ArduinoPicture from "../assets/commit/arduino.webp";
 import FaqSection from "../components/commit/faq-section.astro";
 import ScheduleSection from "../components/commit/schedule.astro";
 import Track from "../components/commit/track.astro";
@@ -50,6 +51,15 @@ import "../styles/global.css";
             >
                 <MachineLogo class="w-full h-auto" />
             </Track>
+            <div class="md:col-span-2 md:justify-self-center md:w-[calc(50%-0.5rem)]">
+                <Track
+                    id="freestyle"
+                    title="Freestyle"
+                    description="For hackers who already have their own idea and want to build whatever they like."
+                >
+                    <FreestyleLogo class="w-full h-auto" />
+                </Track>
+            </div>
         </div>
 
         <ScheduleSection />
