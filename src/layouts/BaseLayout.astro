@@ -2,9 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 
-export type MetaEntry =
-    | { content: string; name: string }
-    | { content: string; property: string };
+export type MetaEntry = { content: string; name: string } | { content: string; property: string };
 
 export interface Props {
     title?: string;
@@ -28,7 +26,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="theme-color" content="#000000" />
-        
+
         <title>{pageTitle}</title>
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
@@ -39,10 +37,13 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
         <meta property="og:description" content={description} />
         <meta property="og:site_name" content="init" />
         <meta name="twitter:card" content="summary" />
-        
-        {meta.map((m) => "property" in m 
-            ? ( <meta property={m.property} content={m.content} /> ) 
-            : ( <meta name={m.name} content={m.content} /> )
+
+        {meta.map((m) =>
+            "property" in m ? (
+                <meta property={m.property} content={m.content} />
+            ) : (
+                <meta name={m.name} content={m.content} />
+            )
         )}
 
         <ClientRouter />

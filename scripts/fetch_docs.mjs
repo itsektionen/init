@@ -12,19 +12,17 @@ const isCI = Boolean(process.env.NETLIFY || process.env.CI);
 const force = process.argv.includes("--force") || process.argv.includes("-f");
 
 if (isCI || force) {
-  rmSync(DIR, { recursive: true, force: true });
+    rmSync(DIR, { recursive: true, force: true });
 }
 
 if (!existsSync(DIR)) {
-  console.log("Cloning documents...");
-  const repo = REPO.replace(/^https?:\/\//, "");
-  const repoUrl = TOKEN ? `https://${TOKEN}@${repo}` : REPO;
+    console.log("Cloning documents...");
+    const repo = REPO.replace(/^https?:\/\//, "");
+    const repoUrl = TOKEN ? `https://${TOKEN}@${repo}` : REPO;
 
-  execFileSync(
-    "git",
-    ["clone", "--depth", "1", "--branch", BRANCH, repoUrl, DIR],
-    { stdio: "inherit" },
-  );
+    execFileSync("git", ["clone", "--depth", "1", "--branch", BRANCH, repoUrl, DIR], {
+        stdio: "inherit",
+    });
 } else {
-  console.log(`${DIR} already exists. Skipping.`);
+    console.log(`${DIR} already exists. Skipping.`);
 }
